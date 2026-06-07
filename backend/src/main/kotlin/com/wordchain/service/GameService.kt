@@ -135,6 +135,7 @@ class GameService(
         repository.addUsedWord(roomCode, trimmedWord)
         room.lastWord = trimmedWord
         room.usedWords.add(trimmedWord)
+        room.players.find { it.sessionId == sessionId }?.let { it.score++ }
 
         // 다음 턴으로 전환
         val nextTurn = advanceTurn(room)
@@ -265,7 +266,10 @@ class GameService(
         repository.save(room)
 
         val winner = room.players.find { it.isAlive }
-        val ranking = room.players.sortedByDescending { it.score }
+        // 살아있는 플레이어(우승자) 먼저, 그 다음 단어 많이 낸 순
+        val ranking = room.players.sortedWith(
+            compareByDescending<Player> { it.isAlive }.thenByDescending { it.score }
+        )
 
         broadcast(room.roomCode, WsMessage(
             type = MessageType.GAME_OVER,
