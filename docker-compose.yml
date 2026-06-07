@@ -1,10 +1,9 @@
 services:
   redis:
     image: redis:7-alpine
-    # 6379 포트는 외부에 노출하지 않음 (컨테이너 내부 통신만)
 
   backend:
-    build: ./backend
+    image: gunoo4/kkotuli-backend:latest
     ports:
       - "8080:8080"
     environment:
@@ -14,7 +13,7 @@ services:
       - redis
 
   frontend:
-    build: ./frontend
+    image: gunoo4/kkotuli-frontend:latest
     ports:
       - "80:80"
     depends_on:
