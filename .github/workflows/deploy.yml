@@ -31,6 +31,9 @@ jobs:
           context: ./frontend
           push: true
           tags: gunoo4/kkotuli-frontend:latest
+          build-args: |
+            VITE_API_BASE=http://43.201.145.134:8080/api
+            VITE_WS_URL=http://43.201.145.134:8080/ws
 
       - name: EC2 배포
         uses: appleboy/ssh-action@v1

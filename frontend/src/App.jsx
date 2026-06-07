@@ -85,6 +85,15 @@ export default function App() {
   );
 }
 
+// ── 랜덤 닉네임 ───────────────────────────────────────────────────────────────
+const RANDOM_ADJECTIVES = ["빠른","느린","졸린","배고픈","용감한","귀여운","무서운","신나는","행복한","슬픈","익살스런","조용한","시끄러운","멋진","엉뚱한"];
+const RANDOM_NOUNS = ["고양이","강아지","토끼","곰","여우","늑대","펭귄","오리","독수리","사자","호랑이","코끼리","기린","판다","너구리"];
+const randomNickname = () => {
+  const adj = RANDOM_ADJECTIVES[Math.floor(Math.random() * RANDOM_ADJECTIVES.length)];
+  const noun = RANDOM_NOUNS[Math.floor(Math.random() * RANDOM_NOUNS.length)];
+  return adj + noun;
+};
+
 // ── 홈 화면 ───────────────────────────────────────────────────────────────────
 function HomeScreen({ onRoomReady }) {
   const [nickname, setNickname] = useState("");
@@ -137,7 +146,7 @@ function HomeScreen({ onRoomReady }) {
     <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", minHeight:"100vh", padding:"2rem" }}>
       <div style={{ textAlign:"center", marginBottom:"3rem" }}>
         <div style={{ fontSize:"4rem", marginBottom:"0.5rem" }}>🔤</div>
-        <h1 style={{ fontSize:"3rem", fontWeight:700, color:"var(--color-text-primary)", margin:0, letterSpacing:"-0.02em" }}>끝말잇기</h1>
+        <h1 style={{ fontSize:"3rem", fontWeight:700, color:"var(--color-text-primary)", margin:0, letterSpacing:"-0.02em" }}>꼬투리</h1>
         <p style={{ color:"var(--color-text-secondary)", fontSize:"1.1rem", marginTop:"0.5rem" }}>친구와 실시간으로 즐기는 단어 게임</p>
       </div>
 
@@ -157,13 +166,19 @@ function HomeScreen({ onRoomReady }) {
         <div style={{ display:"flex", flexDirection:"column", gap:"1rem" }}>
           <div>
             <label style={{ fontSize:"0.85rem", color:"var(--color-text-secondary)", display:"block", marginBottom:"6px" }}>닉네임</label>
-            <input
-              placeholder="게임에서 사용할 이름"
-              value={nickname} onChange={e => setNickname(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && handleSubmit()}
-              style={{ width:"100%", boxSizing:"border-box" }}
-              maxLength={12}
-            />
+            <div style={{ display:"flex", gap:"0.5rem" }}>
+              <input
+                placeholder="게임에서 사용할 이름"
+                value={nickname} onChange={e => setNickname(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleSubmit()}
+                style={{ flex:1, boxSizing:"border-box" }}
+                maxLength={12}
+              />
+              <button onClick={() => setNickname(randomNickname())} title="랜덤 닉네임" style={{
+                border:"1px solid var(--color-border-tertiary)", background:"var(--color-background-secondary)",
+                borderRadius:"var(--border-radius-md)", padding:"0 0.75rem", fontSize:"1.1rem", flexShrink:0
+              }}>🎲</button>
+            </div>
           </div>
 
           {mode === "join" && (
