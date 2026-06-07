@@ -1,0 +1,23 @@
+# 환경변수 (API 키 등 민감 정보)
+.env
+.env.local
+.env.*.local
+
+# 프론트엔드
+frontend/node_modules/
+frontend/dist/
+
+# 백엔드
+backend/.gradle/
+backend/build/
+backend/bin/
+backend/*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

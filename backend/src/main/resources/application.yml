@@ -1,0 +1,25 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  threads:
+    virtual:
+      enabled: true  # Java 21 가상 쓰레드 활성화
+
+server:
+  port: 8080
+
+word-chain:
+  dictionary-api:
+    key: ${DICTIONARY_API_KEY:your-api-key-here}
+    url: https://stdict.korean.go.kr/api/search.do
+  game:
+    turn-timeout-seconds: 30
+    max-players: 8
+    chat-history-size: 100
+    room-ttl-hours: 2
+
+logging:
+  level:
+    com.wordchain: DEBUG
