@@ -1,6 +1,7 @@
 package com.wordchain.model
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonValue
 
 // ─── 게임 상태 ────────────────────────────────────────────────────────────────
@@ -23,6 +24,7 @@ data class Player(
 
 // ─── 게임 방 ──────────────────────────────────────────────────────────────────
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class GameRoom(
     val roomCode: String,
     val hostSessionId: String,

@@ -246,8 +246,20 @@ function LobbyScreen({ session, stompRef, wsReady, onGameStart, onRoomClosed }) 
   }, [wsReady]);
 
   const copyCode = () => {
-    navigator.clipboard.writeText(session.roomCode)
-      .then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    const text = session.roomCode;
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done);
+    } else {
+      const el = document.createElement("textarea");
+      el.value = text;
+      el.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+      document.body.appendChild(el);
+      el.focus(); el.select();
+      try { document.execCommand("copy"); } catch (_) {}
+      document.body.removeChild(el);
+      done();
+    }
   };
 
   const startGame = async () => {
