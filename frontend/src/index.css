@@ -1,36 +1,26 @@
 :root {
-  /* 배경 */
-  --color-background-primary:   #ffffff;
-  --color-background-secondary: #f4f4f5;
-  --color-background-tertiary:  #f0f0f2;
-  --color-background-info:      #eff6ff;
-  --color-background-success:   #f0fdf4;
-  --color-background-warning:   #fffbeb;
+  --color-background-primary:   #1e1b33;
+  --color-background-secondary: #251f3e;
+  --color-background-tertiary:  #13111e;
+  --color-background-info:      rgba(124, 58, 237, 0.18);
+  --color-background-success:   rgba(34, 197, 94, 0.15);
+  --color-background-warning:   rgba(245, 158, 11, 0.15);
 
-  /* 텍스트 */
-  --color-text-primary:   #18181b;
-  --color-text-secondary: #52525b;
-  --color-text-tertiary:  #a1a1aa;
-  --color-text-danger:    #ef4444;
-  --color-text-info:      #2563eb;
-  --color-text-success:   #16a34a;
-  --color-text-warning:   #d97706;
+  --color-text-primary:   #f3f0ff;
+  --color-text-secondary: #a89cc8;
+  --color-text-tertiary:  #5e5480;
+  --color-text-danger:    #f87171;
+  --color-text-info:      #a78bfa;
+  --color-text-success:   #4ade80;
+  --color-text-warning:   #fbbf24;
 
-  /* 보더 */
-  --color-border-secondary: #d4d4d8;
-  --color-border-tertiary:  #e4e4e7;
-  --color-border-info:      #93c5fd;
+  --color-border-secondary: #352d55;
+  --color-border-tertiary:  #2a2347;
+  --color-border-info:      #7c3aed;
 
-  /* 보더 라디우스 */
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
-  --border-radius-xl: 16px;
-
-  font-family: 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
-  font-size: 16px;
-  color: var(--color-text-primary);
-  background: var(--color-background-tertiary);
-  -webkit-font-smoothing: antialiased;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
+  --border-radius-xl: 20px;
 }
 
 * {
@@ -41,6 +31,11 @@
 
 body {
   margin: 0;
+  background: #13111e;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(99, 102, 241, 0.10) 0%, transparent 60%);
+  min-height: 100vh;
 }
 
 #root {
@@ -50,26 +45,36 @@ body {
 input {
   border: 1px solid var(--color-border-tertiary);
   border-radius: var(--border-radius-md);
-  padding: 0.6rem 0.875rem;
+  padding: 0.65rem 0.875rem;
   font-size: 1rem;
   font-family: inherit;
-  background: var(--color-background-primary);
+  background: rgba(255,255,255,0.05);
   color: var(--color-text-primary);
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--color-text-tertiary);
 }
 
 input:focus {
   border-color: var(--color-border-info);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
 }
 
 input:disabled {
-  background: var(--color-background-secondary);
-  color: var(--color-text-tertiary);
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 button {
   font-family: inherit;
   cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.97);
 }
