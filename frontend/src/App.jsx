@@ -145,8 +145,7 @@ function HomeScreen({ onRoomReady }) {
   return (
     <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", minHeight:"100vh", padding:"2rem" }}>
       <div style={{ textAlign:"center", marginBottom:"3rem" }}>
-        <div style={{ fontSize:"4rem", marginBottom:"0.5rem" }}>🔤</div>
-        <h1 style={{ fontSize:"3rem", fontWeight:700, color:"var(--color-text-primary)", margin:0, letterSpacing:"-0.02em" }}>꼬투리</h1>
+        <h1 style={{ fontSize:"3.5rem", fontWeight:800, color:"var(--color-text-primary)", margin:0, letterSpacing:"-0.03em" }}>꼬투리</h1>
         <p style={{ color:"var(--color-text-secondary)", fontSize:"1.1rem", marginTop:"0.5rem" }}>친구와 실시간으로 즐기는 단어 게임</p>
       </div>
 
