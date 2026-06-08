@@ -60,3 +60,17 @@
 
 [호스트 퇴장] SessionDisconnectEvent → KAN-67 BROADCAST ROOM_CLOSED → Redis 삭제
 ```
+---
+
+### 아키텍처 핵심 결정
+
+**REST API + WebSocket 혼용**
+방 생성·참여처럼 1회성 요청은 REST, 게임 중 실시간 이벤트는 WebSocket으로 목적에 따라 분리했다.
+
+**Redis 단일 저장소**
+비회원 일회성 서비스 특성상 영구 저장이 불필요하다. 인메모리 구조로 빠른 처리 속도를 확보하고, TTL로 게임 종료 후 자동 정리한다.
+
+**비회원 방 코드 방식**
+로그인 없이 세션 ID(UUID)로 유저를 식별하여 진입 장벽을 제거했다.
+
+---
