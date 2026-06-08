@@ -215,6 +215,10 @@ Redis word:cache:{단어} 조회
 외부 API 호출 실패 시 검증 통과 처리한다.
 API 장애로 게임 전체가 멈추는 상황이 잘못된 단어 하나가 통과되는 것보다 더 큰 문제이기 때문이다.
 
+**참고**
+
+- [국립국어원 표준국어대사전 Open API](https://kli.korean.go.kr/term/bbs/indexOpenApiInfo.do)
+
 ---
 
 ## 게임방 채팅
