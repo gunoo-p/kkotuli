@@ -2,6 +2,8 @@
 
 ## 구조도
 
+![시스템 아키텍처](images/msa_archi.png)
+
 ```
 [ Client (React) ]
         |
