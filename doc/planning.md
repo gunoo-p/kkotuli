@@ -154,3 +154,52 @@
     ├── 호스트 퇴장 → 전원 메인 화면으로 이동
     └── 네트워크 끊김 → 재연결 시도 → 실패 시 메인으로 이동
 ```
+## 5. 전체 게임 흐름
+
+```
+[방 생성]   POST /api/rooms
+            → 방 코드(A3F9K2) + 세션 ID 발급 → Redis 초기화 (TTL 2시간)
+
+[방 참여]   POST /api/rooms/join
+            → 세션 ID 발급 → Redis 플레이어 등록
+
+[WS 연결]   ws://{host}/ws?roomCode=A3F9K2&sessionId=uuid
+            → /topic/room/A3F9K2 구독
+
+[게임 시작] 방장 → SEND /app/game/start
+            → 턴 순서 결정 → BROADCAST: GAME_START
+
+[게임 진행] 턴 플레이어 → SEND /app/game/word { "word": "사과" }
+            → 끝말 검증 → 사전 검증
+            → 성공: BROADCAST WORD_RESULT → 다음 턴
+            → 실패/타임아웃: BROADCAST TURN_TIMEOUT → 탈락
+
+[게임 종료] 최후 1인 → BROADCAST GAME_OVER → Redis 삭제
+
+[호스트 퇴장] SessionDisconnectEvent → BROADCAST ROOM_CLOSED → Redis 삭제
+```
+
+---
+
+## 6. 협업 도구 및 규칙
+
+### 6-1. 협업 도구
+
+| 도구 | 용도 |
+|------|------|
+| Jira | 이슈 관리, 스프린트 계획 |
+| GitHub | 소스 코드 버전 관리, PR 기반 코드 리뷰 |
+| GitHub Actions | CI/CD 자동화 (테스트 실패 시 머지 차단) |
+| Discord / Kakao Talk | 실시간 팀 커뮤니케이션 |
+
+### 6-2. 브랜치 전략
+
+```
+main       ← 배포 브랜치 (직접 push 금지)
+dev        ← 개발 통합 브랜치
+feat/      ← 기능별 개발 브랜치 (예: feat/word-validation)
+```
+
+- 모든 기능 개발은 `feat/` 브랜치에서 진행하고 `dev`로 PR을 올린다.
+- `dev` → `main` 머지 시 GitHub Actions CI/CD가 자동으로 배포를 수행한다.
+- `main` 브랜치에 직접 push는 금지하며, 반드시 PR + 코드 리뷰를 거쳐야 한다.
