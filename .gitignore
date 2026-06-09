@@ -9,6 +9,10 @@ frontend/dist/
 frontend/.env
 frontend/.env.*
 
+# 루트 Gradle
+.gradle/
+build/
+
 # 백엔드
 backend/.gradle/
 backend/build/
