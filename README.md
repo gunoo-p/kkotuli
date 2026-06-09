@@ -17,4 +17,4 @@
 | [이슈별 설계](doc/issues.md) | KAN 이슈별 상세 설계 내용 |
 | [CI/CD](doc/cicd.md) | GitHub Actions + AWS EC2 배포 파이프라인 |
 | [트러블슈팅](doc/troubleshooting.md) | 설계 과정에서 발생한 문제와 해결 |
-| [테스트](doc/testing.md) | TDD 테스트 항목 목록 |
+| [테스트](doc/testing.md) | TDD 전략, 3-tier 피라미드(Small/Medium/Large), 93개 테스트 목록 |

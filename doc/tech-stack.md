@@ -41,7 +41,8 @@ spring:
 
 | 기술 | 선택 이유 |
 |------|-----------|
-| **JUnit 5 + MockK** | Kotlin 전용 모킹 라이브러리. `every { } returns` 문법으로 Redis 의존성 모킹 후 비즈니스 로직만 독립 테스트 |
+| **Kotlin Test (kotlin.test)** | JUnit 5와 통합되는 Kotlin 표준 테스트 프레임워크. `assertFailsWith<T>` 등 Kotlin 관용 API로 예외 테스트 작성 |
+| **3-tier TDD 피라미드** | Small(도메인 단위) → Medium(서비스 단위) → Large(시나리오 단위) 3단계 구조로 93개 테스트 구성. Spring 컨텍스트 없이 순수 Kotlin 객체만으로 실행되어 속도가 빠름 |
 
 ### DevOps
 
